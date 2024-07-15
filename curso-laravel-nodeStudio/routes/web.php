@@ -4,13 +4,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 
 
+//Resource
+
+route::resource('produtos', ProdutoController::class);
+
 //Controllers
 
-Route::get('/', [ProdutoController::class, 'index'] );
+// Route::get('/', [ProdutoController::class, 'index'] );
 
 //Passando parametros para o controller
 
-route::get('/Produtos/{id}', [ProdutoController::class, 'show']);
+// route::get('/produto/{id?}', [ProdutoController::class, 'show'])->name('produto.show');
+
 
 //Grupos de rotas
 
