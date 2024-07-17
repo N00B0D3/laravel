@@ -8,6 +8,7 @@ use App\Http\Controllers\ProdutoController;
 
 route::resource('produtos', ProdutoController::class);
 
+
 //Controllers
 
 // Route::get('/', [ProdutoController::class, 'index'] );

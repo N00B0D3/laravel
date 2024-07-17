@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produto;
 
 class ProdutoController extends Controller
 {
@@ -11,8 +12,16 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = \App\Models\Produto::all();
-        return dd($produtos);
+        //$produtos = Produto::all();
+        //return dd($produtos);
+        //return view('site/empresa') //para abrir views em pastas especificas, pode se usar "." no lugar da "/"
+        //imprimindo dados na view
+        $nome = 'Ruan';  
+        $idade = 24;
+        $frutas = ['banana', 'laranja', 'morango'];
+        $html = "<h1>Olá eu sou h1</h1>";
+        //return view('site/empresa', [ 'nome' => $nome, 'idade' =>$idade, 'html' =>$html]);
+        return view('site/home', compact('nome', 'idade', 'html', 'frutas'));
     }
 
     /**
