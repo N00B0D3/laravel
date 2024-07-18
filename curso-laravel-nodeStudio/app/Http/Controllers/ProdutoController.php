@@ -12,16 +12,17 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //$produtos = Produto::all();
+        $produtos = Produto::paginate(3);
+        return view('site.home', compact('produtos'));
         //return dd($produtos);
         //return view('site/empresa') //para abrir views em pastas especificas, pode se usar "." no lugar da "/"
         //imprimindo dados na view
-        $nome = 'Ruan';  
-        $idade = 24;
-        $frutas = ['banana', 'laranja', 'morango'];
-        $html = "<h1>Olá eu sou h1</h1>";
-        //return view('site/empresa', [ 'nome' => $nome, 'idade' =>$idade, 'html' =>$html]);
-        return view('site/home', compact('nome', 'idade', 'html', 'frutas'));
+        // $nome = 'Ruan';  
+        // $idade = 24;
+        // $frutas = ['banana', 'laranja', 'morango'];
+        // $html = "<h1>Olá eu sou h1</h1>";
+        // //return view('site/empresa', [ 'nome' => $nome, 'idade' =>$idade, 'html' =>$html]);
+        // return view('site/home', compact('nome', 'idade', 'html', 'frutas'));
     }
 
     /**
