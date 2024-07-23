@@ -4,6 +4,8 @@
 
     <div class="row container">
         <div>
+            <h5>{{"Categoria: $categoria->nome"}}</h5>
+
             @foreach ($produtos as $produto)
                 <div class="col s12 m4">
                     <div class="card">
