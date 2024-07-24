@@ -12,8 +12,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::paginate(3);
-        return view('site.home', compact('produtos'));
+        // $produtos = Produto::paginate(3);
+        // return view('site.home', compact('produtos'));
         //return dd($produtos);
         //return view('site/empresa') //para abrir views em pastas especificas, pode se usar "." no lugar da "/"
         //imprimindo dados na view

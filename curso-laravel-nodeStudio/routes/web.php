@@ -1,28 +1,36 @@
 <?php
 
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
-
+use App\Http\Middleware\CheckEmail;
 
 //Resource
 
-route::resource('produtos', ProdutoController::class);
+Route::resource('produtos', ProdutoController::class);
 
 //produtos
 Route::get('/', [SiteController::class, 'index'])->name('site/index');
-route::get('/produto/{slug}', [SiteController::class, 'details'])->name('site/details');
+Route::get('/produto/{slug}', [SiteController::class, 'details'])->name('site/details');
 Route::get('/categorias/{id}', [SiteController::class, 'categoria'])->name('site/categoria');
 
 //login
-route::view('/login', 'login/form')->name('login/form');
-route::post('auth', [LoginController::class, 'auth'])->name('login/auth');
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin/dashboard');
+Route::view('/login', 'login/form')->name('login/form');
+Route::post('/auth', [LoginController::class, 'auth'])->name('login/auth');
+
 
 //logout
 Route::get('/logout',[LoginController::class, 'logout'])->name('login/logout');
+
+//carrinho
+Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho/index');
+
+Route::middleware(CheckEmail::class)->group(function (){
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin/dashboard');
+});
 
 
 

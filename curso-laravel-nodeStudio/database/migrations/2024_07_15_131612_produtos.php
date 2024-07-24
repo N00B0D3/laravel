@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produtos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nome');
             $table->text('descricao');
-            $table->double('preco', 10, 2);
+            $table->decimal('valor', 6, 2)->default(0);
             $table->string('slug');
             $table->string('imagem')->nullable();
+            $table->enum('ativo', ['S', 'N'])->default('S');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); //cascade é usado para quando o usuario for deletado, os registros desse usuario tambem sejam deletados para não gerar produtos orfãos
             $table->unsignedBigInteger('id_categoria');
