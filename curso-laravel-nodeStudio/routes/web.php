@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
@@ -9,9 +11,19 @@ use App\Http\Controllers\SiteController;
 
 route::resource('produtos', ProdutoController::class);
 
+//produtos
 Route::get('/', [SiteController::class, 'index'])->name('site/index');
 route::get('/produto/{slug}', [SiteController::class, 'details'])->name('site/details');
 Route::get('/categorias/{id}', [SiteController::class, 'categoria'])->name('site/categoria');
+
+//login
+route::view('/login', 'login/form')->name('login/form');
+route::post('auth', [LoginController::class, 'auth'])->name('login/auth');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin/dashboard');
+
+//logout
+Route::get('/logout',[LoginController::class, 'logout'])->name('login/logout');
+
 
 
 //Controllers
