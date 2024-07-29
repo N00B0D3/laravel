@@ -19,20 +19,23 @@ Route::get('/', [SiteController::class, 'index'])->name('site/index');
 Route::get('/produto/{slug}', [SiteController::class, 'details'])->name('site/details');
 Route::get('/categorias/{id}', [SiteController::class, 'categoria'])->name('site/categoria');
 
-//login
+//# login
 Route::view('/login', 'login/form')->name('login/form');
 Route::post('/auth', [LoginController::class, 'auth'])->name('login/auth');
 
 
-//logout
+//# logout
 Route::get('/logout',[LoginController::class, 'logout'])->name('login/logout');
+
+//# register
 Route::get('/register',[LoginController::class, 'create'])->name('login/create');
 
-//carrinho
-Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho/index');
-
+//# Middleware e carrinho
 Route::middleware(CheckEmail::class)->group(function (){
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin/dashboard');
+    Route::get('/carrinho', [CarrinhoController::class, 'carrinhoLista'])->name('site/carrinho');
+    Route::post('/carrinho/adicionar', [CarrinhoController::class, 'adicionaCarrinho'])->name('site/addcarrinho');
+
 });
 
 
