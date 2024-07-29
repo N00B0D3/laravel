@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
 use App\Http\Middleware\CheckEmail;
+use App\Http\Controllers\UserController;
 
 //Resource
 
 Route::resource('produtos', ProdutoController::class);
+Route::resource('users', UserController::class);
 
 //produtos
 Route::get('/', [SiteController::class, 'index'])->name('site/index');
@@ -24,6 +26,7 @@ Route::post('/auth', [LoginController::class, 'auth'])->name('login/auth');
 
 //logout
 Route::get('/logout',[LoginController::class, 'logout'])->name('login/logout');
+Route::get('/register',[LoginController::class, 'create'])->name('login/create');
 
 //carrinho
 Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho/index');
