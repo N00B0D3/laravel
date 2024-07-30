@@ -18,7 +18,7 @@
         <form action="{{route('site/addcarrinho')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{$produto->id}}">
-            <input type="number" name="qnt" value="1">
+            <input type="number" name="quantidade" value="1">
         <button class="btn orange btn-large">Comprar</button>
         </form> 
     </div>
