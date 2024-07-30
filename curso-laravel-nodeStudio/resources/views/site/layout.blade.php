@@ -31,7 +31,7 @@
             <ul id="nav-mobile" class="left">
                 <li><a href="{{route('site/index')}}">Home</a></li>
                 <li><a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Categorias <i class="material-icons right">expand_more</i></a></li>
-                <li><a href="{{route('site/carrinho')}}">Carrinho <span class="new badge blue"></a></li>
+                <li><a href="{{route('site/carrinho')}}">Carrinho <span class="new badge blue" data-badge-caption="">{{$numeroDeItens}}</a></li>
                 <li><a href="#">#</a></li>
             </ul>
 

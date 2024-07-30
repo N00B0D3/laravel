@@ -23,7 +23,7 @@ class ProdutoFactory extends Factory
         return [
             'nome' => $nome,
             'descricao' =>$this->faker->paragraph(),
-            'preco' => $this->faker->randomNumber(2),
+            'valor' => $this->faker->randomNumber(2),
             'slug' => Str::slug($nome), //cria uma url amigavel baseada no parametro passado
             'imagem' =>$this->faker->imageUrl(400, 400),
             'id_user' => User::pluck('id')->random(),

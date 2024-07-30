@@ -35,6 +35,8 @@ Route::middleware(CheckEmail::class)->group(function (){
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin/dashboard');
     Route::get('/carrinho', [CarrinhoController::class, 'carrinhoLista'])->name('site/carrinho');
     Route::post('/carrinho/adicionar', [CarrinhoController::class, 'adicionaCarrinho'])->name('site/addcarrinho');
+    Route::post('/carrinho/atualiza-quantidade', [CarrinhoController::class, 'atualizaQuantidade'])->name('site/attquantidade');
+    route::post('/remover', [CarrinhoController::class, 'removeCarrinho'])->name('site/removecarrinho');
 
 });
 

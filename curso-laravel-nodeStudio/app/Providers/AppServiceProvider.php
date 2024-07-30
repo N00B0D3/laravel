@@ -5,8 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Categoria;
-use App\Models\Sanctum\PersonalAccessToken;
-use Laravel\Sanctum\Sanctum;
+use Illuminate\Support\Facades\Session;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
 
         $categoriasMenu = Categoria::all();
         $view->with('categoriasMenu', $categoriasMenu);
+
+        $carrinho = Session::get('carrinho', []);
+        $numeroDeItens = array_sum(array_column($carrinho, 'quantidade'));
+        View::share('numeroDeItens', $numeroDeItens);
 
     });
 }
