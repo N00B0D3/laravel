@@ -16,7 +16,7 @@ class CheckEmail
     public function handle(Request $request, Closure $next): Response
     {
         if(!auth()->check()){
-            return redirect(route('login/form'));
+            return redirect(route('login/   form'));
         }
 
         $email = auth()->user()->email;

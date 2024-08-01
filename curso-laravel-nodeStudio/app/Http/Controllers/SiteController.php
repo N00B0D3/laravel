@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Produto;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
+
+
 
 class SiteController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         $produtos = Produto::paginate(3);
@@ -21,9 +28,29 @@ class SiteController extends Controller
         return view('site/home', compact('registros'));
     }
 
-    public function details($slug)
+    public function details(Request $request, $slug): RedirectResponse
     {
+
         $produto = Produto::where('slug', $slug)->first();
+
+        //Gate::authorize('ver-produto', $produto); //# usando gate para apenas o usuario que cadastrou o produto possa visualizar os detalhes do mesmo
+        $this->authorize('verProduto', $produto); //fazendo o mesmo com policy
+
+        //restrigindo acesso com allows,denies,can,cannot no controller
+
+        // if ($request->user()->can('verProduto', $produto)) {
+        //     return view('site.details', compact('produto'));
+        // }
+
+        if(gate::allows('ver-produto', $produto))
+        {
+            return view('site/details', compact('produto'));
+        }
+
+        if(gate::denies('ver-produto', $produto))
+        {
+            return redirect()->route('site/index');
+        }
 
         return view('site/details', compact('produto'));
     }
