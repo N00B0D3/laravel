@@ -15,6 +15,7 @@ class produto extends Model
         'imagem',
         'valor',
         'ativo',
+        'quantidade'
     ];
 
     //especificando nome da tabela caso não a ligue diretamente

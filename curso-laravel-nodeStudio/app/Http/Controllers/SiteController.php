@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
 
 
 
@@ -28,7 +29,7 @@ class SiteController extends Controller
         return view('site/home', compact('registros'));
     }
 
-    public function details(Request $request, $slug): RedirectResponse
+    public function details(Request $request, $slug): RedirectResponse|View
     {
 
         $produto = Produto::where('slug', $slug)->first();
@@ -42,17 +43,16 @@ class SiteController extends Controller
         //     return view('site.details', compact('produto'));
         // }
 
-        if(gate::allows('ver-produto', $produto))
-        {
-            return view('site/details', compact('produto'));
+        if (Gate::allows('ver-produto', $produto)) {
+            return view('site.details', compact('produto'));
         }
 
-        if(gate::denies('ver-produto', $produto))
-        {
-            return redirect()->route('site/index');
-        }
+        // if(gate::denies('ver-produto', $produto))
+        // {
+        //     return redirect()->route('site/index');
+        // }
 
-        return view('site/details', compact('produto'));
+        return redirect()->route('site.index');
     }
 
     public function categoria($id)
@@ -76,5 +76,18 @@ class SiteController extends Controller
         }
         };
         return redirect(route('site.home'));
+    }
+
+    public function estoqueAtual($id)
+    {
+        $produto = Produto::find($id);
+
+        if ($produto) {
+            return response()->json([
+                'quantidade' => $produto->quantidade
+            ]);
+        }
+
+        return response()->json(['error' => 'Produto não encontrado'], 404);
     }
 }

@@ -50,12 +50,13 @@
     @yield('conteudo')
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{asset('js/jquery.js')}}"></script>
     <script> 
     /*drop down*/
     var elemDrop = document.querySelectorAll('.dropdown-trigger');
     var instanceDrop = M.Dropdown.init(elemDrop, {
       coverTrigger: false,
-    contrainWidth: false
+      contrainWidth: false
     })
     </script>
 

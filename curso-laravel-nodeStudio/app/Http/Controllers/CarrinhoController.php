@@ -25,25 +25,35 @@ class CarrinhoController extends Controller
     return view('site/carrinho', compact('itens', 'total'));
 }
 
-    public function adicionaCarrinho(Request $request)
+public function adicionaCarrinho(Request $request)
 {
     $id = $request->input('id');
     $quantidade = $request->input('quantidade', 1);
     $carrinho = Session::get('carrinho', []);
 
-    if (isset($carrinho[$id])) {
-        $carrinho[$id]['quantidade'] += $quantidade;
+    $produto = Produto::find($id);
+    if ($produto && $produto->quantidade >= $quantidade) {
+        if (isset($carrinho[$id])) {
+            $carrinho[$id]['quantidade'] += $quantidade;
+        } else {
+            $carrinho[$id] = [
+                'id' => $id,
+                'quantidade' => $quantidade
+            ];
+        }
+
+        // Atualiza o estoque
+        $produto->quantidade -= $quantidade;
+        $produto->save();
+
+        Session::put('carrinho', $carrinho);
+
+        return redirect()->route('site/carrinho')->with('sucesso', 'Item adicionado ao carrinho.');
     } else {
-        $carrinho[$id] = [
-            'id' => $id,
-            'quantidade' => $quantidade
-        ];
+        return redirect()->route('site/carrinho')->with('erro', 'Quantidade de estoque insuficiente.');
     }
-
-    Session::put('carrinho', $carrinho);
-
-    return redirect()->route('site/carrinho')->with('sucesso', 'Item adicionado ao carrinho.');
 }
+
 
 
 public function atualizaQuantidade(Request $request)

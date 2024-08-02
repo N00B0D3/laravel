@@ -13,10 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(){
         $this->call([
-            //UsersSeeder::class,
-            //CategoriasSeeder::class,     // por usar apenas uma, não é preciso usar a estrutura de array
+            UsersSeeder::class, //usado para carregar tudo ao usar o comando db:seed
+            CategoriasSeeder::class,     // por usar apenas uma, não é preciso usar a estrutura de array
             ProdutosSeeder::class
-            //UsersSeeder::class,     //usado para carregar tudo ao usar o comando db:seed
         ]);
     }
 }

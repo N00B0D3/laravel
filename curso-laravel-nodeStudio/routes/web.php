@@ -41,6 +41,9 @@ Route::middleware(CheckEmail::class)->group(function (){
 
 });
 
+Route::get('/produto/{id}/estoque', [SiteController::class, 'estoqueAtual'])->name('produto.estoque');
+
+
 
 
 //Controllers
