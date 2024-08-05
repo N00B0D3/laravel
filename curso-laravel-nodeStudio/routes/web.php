@@ -33,6 +33,9 @@ Route::get('/register',[LoginController::class, 'create'])->name('login/create')
 //# Middleware e carrinho
 Route::middleware(CheckEmail::class)->group(function (){
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin/dashboard');
+    route::get('/admin/produtos', function(){
+        return view('admin/produtos');
+    })->name('admin/produtos');
     Route::get('/carrinho', [CarrinhoController::class, 'carrinhoLista'])->name('site/carrinho');
     Route::post('/carrinho/adicionar', [CarrinhoController::class, 'adicionaCarrinho'])->name('site/addcarrinho');
     Route::post('/carrinho/atualiza-quantidade', [CarrinhoController::class, 'atualizaQuantidade'])->name('site/attquantidade');
