@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/produtos', [ProdutoController::class, 'store']);
+route::get('/produtos', function(Request $request){
+    return response()->json([
+        'status' => true,
+        'mensagem' => 'listando produtos',
+    ],200);
+});
+// Route::post('/produtos', [ProdutoController::class, 'store']);
 
